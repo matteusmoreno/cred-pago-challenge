@@ -23,4 +23,5 @@ public class Transaction {
     @ManyToOne
     @JoinColumn(name = "credit_card_number")
     private CreditCard creditCard;
+    private String date;
 }

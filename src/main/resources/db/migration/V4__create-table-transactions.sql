@@ -4,6 +4,7 @@ CREATE TABLE transactions (
     cart_id VARCHAR(36) NOT NULL,
     total_to_pay INT NOT NULL,
     credit_card_number VARCHAR(36) NOT NULL,
+    date VARCHAR(20) NOT NULL,
 
     FOREIGN KEY (client_id) REFERENCES clients(client_id),
     FOREIGN KEY (cart_id) REFERENCES cart(cart_id),

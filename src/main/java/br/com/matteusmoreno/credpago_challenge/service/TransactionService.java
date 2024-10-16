@@ -11,6 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 @Service
 public class TransactionService {
 
@@ -27,6 +30,8 @@ public class TransactionService {
 
     @Transactional
     public Transaction createTransaction(CreateTransactionRequest request) {
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
         Client client = clientRepository.findById(request.clientId())
                 .orElseThrow(() -> new RuntimeException("Client not found"));
 
@@ -38,6 +43,7 @@ public class TransactionService {
                 .cart(cart)
                 .totalToPay(cart.getProduct().getPrice())
                 .creditCard(client.getCreditCard())
+                .date(LocalDate.now().format(dateFormatter))
                 .build();
 
         return transactionRepository.save(transaction);
