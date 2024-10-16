@@ -54,4 +54,8 @@ public class TransactionService {
     public List<TransactionHistoryResponse> findAllTransactions() {
         return transactionRepository.findAll().stream().map(TransactionHistoryResponse::new).toList();
     }
+
+    public List<TransactionHistoryResponse> findAllTransactionsByClientId(String clientId) {
+        return transactionRepository.findAllByClientId(clientId).stream().map(TransactionHistoryResponse::new).toList();
+    }
 }

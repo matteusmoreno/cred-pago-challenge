@@ -38,4 +38,8 @@ public class TransactionController {
         return ResponseEntity.ok(transactionService.findAllTransactions());
     }
 
+    @GetMapping("/history/{clientId}")
+    public ResponseEntity<List<TransactionHistoryResponse>> findAllByClientId(@PathVariable String clientId) {
+        return ResponseEntity.ok(transactionService.findAllTransactionsByClientId(clientId));
+    }
 }
