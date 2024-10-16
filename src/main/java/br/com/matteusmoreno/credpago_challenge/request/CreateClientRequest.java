@@ -4,5 +4,6 @@ import jakarta.validation.constraints.NotBlank;
 
 public record CreateClientRequest(
         @NotBlank(message = "Client name is required")
-        String clientName) {
+        String clientName,
+        CreateCreditCardRequest creditCard) {
 }
