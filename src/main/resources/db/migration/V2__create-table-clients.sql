@@ -1,0 +1,4 @@
+CREATE TABLE clients (
+    client_id VARCHAR(36) NOT NULL PRIMARY KEY,
+    name VARCHAR(150) NOT NULL
+);
