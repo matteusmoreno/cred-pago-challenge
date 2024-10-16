@@ -5,6 +5,7 @@ import jakarta.validation.constraints.Pattern;
 
 public record CreateCreditCardRequest(
         @NotBlank(message = "Card number is required")
+        @Pattern(regexp = "^\\d{16}$", message = "Card number must have 16 digits")
         String cardNumber,
         @NotBlank(message = "Card holder name is required")
         String cardHolderName,
