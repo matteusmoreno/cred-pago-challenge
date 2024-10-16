@@ -7,13 +7,11 @@ import br.com.matteusmoreno.credpago_challenge.service.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/store/api/v1")
@@ -32,5 +30,10 @@ public class ProductController {
         URI uri = uriBuilder.path("/store/api/v1/product/{id}").buildAndExpand(product.getProductId()).toUri();
 
         return ResponseEntity.created(uri).body(new ProductDetailsResponse(product));
+    }
+
+    @GetMapping("/products")
+    public ResponseEntity<List<ProductDetailsResponse>> listAllProducts() {
+        return ResponseEntity.ok(productService.listAllProducts());
     }
 }
