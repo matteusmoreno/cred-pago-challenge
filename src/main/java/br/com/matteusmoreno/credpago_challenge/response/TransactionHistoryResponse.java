@@ -13,9 +13,16 @@ public record TransactionHistoryResponse(
         this(
                 transaction.getClient().getClientId(),
                 transaction.getTransactionId(),
-                transaction.getCreditCard().getCardNumber(),
+                maskCardNumber(transaction.getCreditCard().getCardNumber()),
                 transaction.getTotalToPay(),
                 transaction.getDate()
         );
+    }
+
+    private static String maskCardNumber(String cardNumber) {
+        if (cardNumber == null || cardNumber.length() < 4) {
+            return cardNumber;
+        }
+        return "**** **** **** " + cardNumber.substring(cardNumber.length() - 4);
     }
 }
