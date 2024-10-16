@@ -7,12 +7,14 @@ import br.com.matteusmoreno.credpago_challenge.repository.CartRepository;
 import br.com.matteusmoreno.credpago_challenge.repository.ClientRepository;
 import br.com.matteusmoreno.credpago_challenge.repository.TransactionRepository;
 import br.com.matteusmoreno.credpago_challenge.request.CreateTransactionRequest;
+import br.com.matteusmoreno.credpago_challenge.response.TransactionHistoryResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 @Service
 public class TransactionService {
@@ -47,6 +49,9 @@ public class TransactionService {
                 .build();
 
         return transactionRepository.save(transaction);
+    }
 
+    public List<TransactionHistoryResponse> findAllTransactions() {
+        return transactionRepository.findAll().stream().map(TransactionHistoryResponse::new).toList();
     }
 }
